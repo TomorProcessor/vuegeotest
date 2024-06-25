@@ -13,7 +13,7 @@ function handleNewCityAdd() {
 </script>
 
 <template>
-  <div :class="'container max-w-2xl mx-auto text-sm font-medium text-gray-900 dark:text-gray-400' + Styles.CardStyle">
+  <div :class="'container max-w-2xl mx-auto ' + Styles.CardStyle + ' ' + Styles.Font">
     <div class="flex items-center mb-2">
       <label for="cityInput" class="mr-2">Új város:</label>
       <input id="cityInput" type="text" v-model="newCityName" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-md px-4 py-2 focus:border-gray-300"/>

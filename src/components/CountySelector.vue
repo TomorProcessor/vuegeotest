@@ -5,15 +5,20 @@ import Styles from "./Styles";
   const store = CountyStore();
 
   function handleSelect(event: Event) {
-    store.selectedCountyId = (<HTMLSelectElement>event.target).selectedOptions[0].getAttribute('value');
+    let value: string | null = (<HTMLSelectElement>event.target).selectedOptions[0].getAttribute('value');
+    if (value) {
+      store.selectedCountyId = parseInt(value);
+    } else {
+      store.selectedCountyId = null;
+    }
   }
 
 </script>
 
 <template>
-  <div v-if="store.loaded" :class="'max-w-2xl mx-auto flex' + Styles.CardStyle">
+  <div :class="'max-w-2xl mx-auto flex' + Styles.CardStyle">
     <div class="flex items-center mb-2">
-      <label for="countries" class="text-sm font-medium text-gray-900 dark:text-gray-400 mr-2">Megye:</label>
+      <label for="countries" :class="'mr-2 ' + Styles.Font">Megye:</label>
       <select
           @change="handleSelect"
           id="countries"
