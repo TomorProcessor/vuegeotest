@@ -3,11 +3,15 @@
 import Styles from "@/components/Styles";
 import {ref} from "vue";
 import type {Ref, UnwrapRef} from "@vue/reactivity";
+import DbMethods from "@/stores/DbMethods";
+import CountyStore from "@/stores/county/CountyStore";
 
 const newCityName: Ref<UnwrapRef<string>> = ref('');
 
-function handleNewCityAdd() {
-  console.log(newCityName.value);
+async function handleNewCityAdd() {
+  // console.log(newCityName.value);
+  const success: boolean = await DbMethods.addNewCity(newCityName.value);
+  if (!success) alert("Failed to add new city!");
 }
 
 </script>

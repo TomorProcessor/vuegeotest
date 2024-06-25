@@ -3,3 +3,5 @@ export const countryList: string = serverUrl + '/counties';
 export const cityList = (countyId: number): string => {
     return serverUrl + '/counties/' + countyId + '/cities';
 };
+
+export const newCity: string = serverUrl + '/new_city';
