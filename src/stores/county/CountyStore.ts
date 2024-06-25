@@ -5,7 +5,8 @@ import type {CountyStoreType, CountyType} from "@/stores/county/CountyStoreType"
 export default defineStore('countyStore', {
     state: (): CountyStoreType  => ({
         counties: null,
-        loaded: false
+        loaded: false,
+        selectedCountyId: null,
     }),
     actions: {
         initializeCountryList() {

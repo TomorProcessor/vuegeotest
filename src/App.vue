@@ -1,6 +1,10 @@
 <script setup lang="ts">
 
 import CountySelector from "@/components/CountySelector.vue";
+import CountyStore from "@/stores/county/CountyStore";
+import NewCity from "@/components/NewCity.vue";
+const store = CountyStore();
+store.initializeCountryList();
 </script>
 
 <template>
@@ -9,6 +13,7 @@ import CountySelector from "@/components/CountySelector.vue";
 
   <main>
     <CountySelector></CountySelector>
+    <NewCity v-if="store.selectedCountyId != null"></NewCity>
   </main>
 </template>
 

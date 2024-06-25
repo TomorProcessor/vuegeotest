@@ -1,0 +1,3 @@
+export default class Styles {
+    public static readonly CardStyle: string = 'bg-white p-4 rounded-md shadow-md max-w-sm mx-auto mt-4 border-t-2 border-gray-500 border-opacity-50';
+}
