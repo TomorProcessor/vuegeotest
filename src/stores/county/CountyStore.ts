@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import DbMethods from "@/stores/DbMethods";
-import type {CountyStoreType} from "@/stores/county/CountyStoreType";
+import type {CountyStoreType, CountyType} from "@/stores/county/CountyStoreType";
 
 export default defineStore('countyStore', {
     state: (): CountyStoreType  => ({
@@ -10,7 +10,7 @@ export default defineStore('countyStore', {
     actions: {
         initializeCountryList() {
             DbMethods.getCountryListFromDb().then((r: Record<string, unknown>) => {
-                this.counties = r;
+                this.counties = <CountyType>r;
                 this.loaded = true;
             });
         }

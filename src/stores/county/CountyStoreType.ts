@@ -1,4 +1,9 @@
+export interface CountyType extends Record<string, unknown> {
+    id: string,
+    name: string
+}
+
 export interface CountyStoreType {
-    counties: Record<string, unknown> | null,
+    counties: Array<CountyType> | null,
     loaded: boolean
 }
