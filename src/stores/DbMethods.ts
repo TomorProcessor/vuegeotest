@@ -1,4 +1,4 @@
-import {cityList, countryList, newCity} from "@/stores/ApiUrls";
+import {cityList, countryList, deleteCity, newCity} from "@/stores/ApiUrls";
 import type {City} from "@/stores/county/CountyStoreType";
 import CountyStore from "@/stores/county/CountyStore";
 
@@ -50,6 +50,28 @@ export default class DbMethods {
                 id: <number>data.id
             });
             store.cities.set(store.selectedCountyId!, cities);
+            return true;
+        } catch (error) {
+            console.error('An error occurred:', error);
+            return false; // Return false in case of an exception
+        }
+    }
+
+    public static async deleteCity(cityId: number): Promise<boolean> {
+        const store = CountyStore();
+        try {
+            const response = await fetch(deleteCity(cityId), {
+                mode: 'cors',
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (!response.ok) {
+                return false;
+            }
+
+            store.deleteCityById(cityId);
             return true;
         } catch (error) {
             console.error('An error occurred:', error);

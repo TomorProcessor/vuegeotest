@@ -4,7 +4,7 @@ import Styles from "@/components/Styles";
 import CountyStore from "@/stores/county/CountyStore";
 import {ref} from "vue";
 import type {Ref, UnwrapRef} from "@vue/reactivity";
-import {cityList} from "@/stores/ApiUrls";
+import DbMethods from "@/stores/DbMethods";
 
 const store = CountyStore();
 const selectedCityId: Ref<UnwrapRef<number>> = ref(NaN);
@@ -15,6 +15,11 @@ function selectCity(id: number) {
 
 function deselectCity() {
   selectedCityId.value = NaN;
+}
+
+async function handleCityDelete(cityId: number) {
+  const success: boolean = await DbMethods.deleteCity(cityId);
+  if (!success) alert("Failed to delete city!");
 }
 
 </script>
@@ -31,7 +36,7 @@ function deselectCity() {
         {{ city.name }}
       </p>
       <div class="flex">
-        <button v-if="selectedCityId == city.id"
+        <button @click="handleCityDelete(city.id)" v-if="selectedCityId == city.id"
                 class="g-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
           Törlés
         </button>

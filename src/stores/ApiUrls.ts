@@ -5,3 +5,7 @@ export const cityList = (countyId: number): string => {
 };
 
 export const newCity: string = serverUrl + '/new_city';
+
+export const deleteCity = (cityId: number): string => {
+    return serverUrl + '/delete_city/' + cityId;
+}

@@ -18,6 +18,22 @@ export default defineStore('countyStore', {
                 }
                 this.loaded = true;
             });
+        },
+        deleteCityById(id: number) {
+            for (let [countyId, cityArray] of this.cities.entries()) {
+                let cityFound: boolean = false;
+                for (const city of cityArray) {
+                    if (city.id === id) {
+                        cityFound = true;
+                        break;
+                    }
+                }
+                if (cityFound) {
+                    cityArray = cityArray.filter(city => city.id !== id);
+                    this.cities.set(countyId, cityArray);
+                    break;
+                }
+            }
         }
     },
     getters: {
