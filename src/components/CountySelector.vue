@@ -1,22 +1,22 @@
 <script setup lang="ts">
-  import CountyStore from "@/stores/county/CountyStore";
+import CountyStore from "@/stores/county/CountyStore";
 import Styles from "./Styles";
 
-  const store = CountyStore();
+const store = CountyStore();
 
-  function handleSelect(event: Event) {
-    let value: string | null = (<HTMLSelectElement>event.target).selectedOptions[0].getAttribute('value');
-    if (value) {
-      store.selectedCountyId = parseInt(value);
-    } else {
-      store.selectedCountyId = null;
-    }
+function handleSelect(event: Event) {
+  let value: string | null = (<HTMLSelectElement>event.target).selectedOptions[0].getAttribute('value');
+  if (value) {
+    store.selectedCountyId = parseInt(value);
+  } else {
+    store.selectedCountyId = null;
   }
+}
 
 </script>
 
 <template>
-  <div :class="'max-w-2xl mx-auto flex' + Styles.CardStyle">
+  <div :class="'max-w-2xl mx-auto flex' + Styles.Card">
     <div class="flex items-center mb-2">
       <label for="countries" :class="'mr-2 ' + Styles.Font">Megye:</label>
       <select
@@ -29,8 +29,3 @@ import Styles from "./Styles";
     </div>
   </div>
 </template>
-
-
-<style scoped>
-
-</style>

@@ -39,7 +39,7 @@ async function handleModifyCity(cityId: number) {
 </script>
 
 <template>
-  <div :class="'city-list' + Styles.CardStyle + ' ' + Styles.Font">
+  <div :class="'city-list' + Styles.Card + ' ' + Styles.Font">
     <div class="flex">
       <h2 class="underline mr-2">Megye:</h2>
       <p>{{ store.selectedCounty?.name }}</p>
@@ -49,25 +49,21 @@ async function handleModifyCity(cityId: number) {
       <p v-if="selectedCityId != city.id" @click="selectCity(city.id)">
         {{ city.name }}
       </p>
-      <input v-else @input="updateInputValue" :value="city.name" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-md px-4 py-2 focus:border-gray-300"/>
+      <input v-else @input="updateInputValue" :value="city.name" type="text" :class="Styles.Input"/>
       <div class="flex">
         <button @click="handleCityDelete(city.id)" v-if="selectedCityId == city.id"
-                class="g-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                :class="Styles.Button">
           Törlés
         </button>
         <button v-if="selectedCityId == city.id" @click="handleModifyCity(city.id)"
-                class="g-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                :class="Styles.Button">
           Módosít
         </button>
         <button @click="deselectCity" v-if="selectedCityId == city.id"
-                class="g-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                :class="Styles.Button">
           Mégsem
         </button>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>
