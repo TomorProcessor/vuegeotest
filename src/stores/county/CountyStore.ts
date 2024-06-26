@@ -20,20 +20,25 @@ export default defineStore('countyStore', {
             });
         },
         deleteCityById(id: number) {
+            const countyIdForCity: number = this.getCountyIdForCityId(id);
+            const cityArray: Array<City> = this.cities.get(countyIdForCity)!.filter(city => city.id !== id);
+            this.cities.set(countyIdForCity, cityArray);
+        },
+        getCountyIdForCityId(id: number): number {
             for (let [countyId, cityArray] of this.cities.entries()) {
-                let cityFound: boolean = false;
                 for (const city of cityArray) {
                     if (city.id === id) {
-                        cityFound = true;
-                        break;
+                        return countyId;
                     }
                 }
-                if (cityFound) {
-                    cityArray = cityArray.filter(city => city.id !== id);
-                    this.cities.set(countyId, cityArray);
-                    break;
-                }
             }
+            return NaN;
+        },
+        getCityById(id: number): City | undefined {
+            const countyIdForCity: number = this.getCountyIdForCityId(id);
+            const cityArray: Array<City> | undefined = this.cities.get(countyIdForCity)
+            if (!cityArray) return undefined;
+            return cityArray.find(city => city.id === id);
         }
     },
     getters: {

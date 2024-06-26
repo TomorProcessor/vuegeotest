@@ -9,3 +9,7 @@ export const newCity: string = serverUrl + '/new_city';
 export const deleteCity = (cityId: number): string => {
     return serverUrl + '/delete_city/' + cityId;
 }
+
+export const updateCity = (cityId: number): string => {
+    return serverUrl + '/update_city/' + cityId;
+}

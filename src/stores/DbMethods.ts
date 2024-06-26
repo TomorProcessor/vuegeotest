@@ -1,4 +1,4 @@
-import {cityList, countryList, deleteCity, newCity} from "@/stores/ApiUrls";
+import {cityList, countryList, deleteCity, newCity, updateCity} from "@/stores/ApiUrls";
 import type {City} from "@/stores/county/CountyStoreType";
 import CountyStore from "@/stores/county/CountyStore";
 
@@ -53,7 +53,7 @@ export default class DbMethods {
             return true;
         } catch (error) {
             console.error('An error occurred:', error);
-            return false; // Return false in case of an exception
+            return false;
         }
     }
 
@@ -75,7 +75,35 @@ export default class DbMethods {
             return true;
         } catch (error) {
             console.error('An error occurred:', error);
-            return false; // Return false in case of an exception
+            return false;
+        }
+    }
+
+    public static async updateCity(cityId: number, cityName: string): Promise<boolean> {
+        const store = CountyStore();
+        const cityData: Record<string, string | number> = {
+            city_name: cityName
+        }
+        try {
+            const response = await fetch(updateCity(cityId), {
+                mode: 'cors',
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(cityData)
+            });
+            if (!response.ok) {
+                return false;
+            }
+
+            const data: Record<string, unknown> = await response.json();
+            const modifiedCity: City | undefined = store.getCityById((<City>data).id);
+            if (modifiedCity) modifiedCity.name = (<City>data).name;
+            return true;
+        } catch (error) {
+            console.error('An error occurred:', error);
+            return false;
         }
     }
 }
